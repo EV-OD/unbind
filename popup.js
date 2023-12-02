@@ -11,7 +11,9 @@ let feature = {
 //   }
 // });
 chrome.storage.sync.get("feature", (result) => {
-  feature = result.feature;
+  if(result.feature){
+    feature = result.feature;
+  }
   makeSwitch(shorts, result.feature.shorts);
   makeSwitch(subscription, result.feature.subscription);
 });

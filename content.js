@@ -20,7 +20,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log("Message received in background:", request);
   if (request.action == "updateFeatureData") {
     feature = request.data;
-    console.log(feature);
     chrome.storage.sync.set({ feature: feature }, function () {
       console.log("Feature data saved:", feature);
       updateUnBind();
@@ -32,7 +31,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 window.onload = function () {
   chrome.storage.sync.get("feature", (result) => {
-    if (result) {
+    if (result && result.feature) {
       feature = result.feature;
       updateUnBind();
     }

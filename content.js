@@ -20,11 +20,24 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log("Message received in background:", request);
   if (request.action == "updateFeatureData") {
     feature = request.data;
-    updateUnBind();
+    console.log(feature);
+    chrome.storage.sync.set({ feature: feature }, function () {
+      console.log("Feature data saved:", feature);
+      updateUnBind();
+    });
   } else if (request.action == "refresh") {
     location.reload();
   }
 });
+
+window.onload = function () {
+  chrome.storage.sync.get("feature", (result) => {
+    if (result) {
+      feature = result.feature;
+      updateUnBind();
+    }
+  });
+};
 
 function updateUnBind() {
   removeUIElements();
@@ -32,6 +45,7 @@ function updateUnBind() {
 }
 
 function redirectSubscription() {
+  console.log(feature);
   if (feature.subscription) {
     var currentURL = window.location.href;
 
@@ -46,8 +60,6 @@ function redirectSubscription() {
     }
   }
 }
-
-
 
 function removeUIElements() {
   if (feature.shorts) {

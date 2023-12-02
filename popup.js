@@ -3,6 +3,19 @@ let feature = {
   subscription: false,
 };
 
+// chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+//   alert("hello");
+//   if (request.action == "localStorageReady") {
+//     feature = request.data;
+//     makeSwitch(shorts, feature.shorts);
+//   }
+// });
+chrome.storage.sync.get("feature", (result) => {
+  feature = result.feature;
+  makeSwitch(shorts, result.feature.shorts);
+  makeSwitch(subscription, result.feature.subscription);
+});
+
 function updateFeatureData() {
   // Call the setFeatureDataAndNotify function
   chrome.tabs.query(
@@ -29,11 +42,9 @@ shorts.addEventListener("click", () => {
 
 let subscription = document.querySelector("#subscription");
 
-shorts.addEventListener("click", () => {
+subscription.addEventListener("click", () => {
   toogleSwitch(subscription, "subscription");
 });
-
-
 
 function toogleSwitch(elt, value) {
   let checkbox = elt.children[0];
@@ -41,10 +52,20 @@ function toogleSwitch(elt, value) {
     feature[value] = true;
   } else {
     feature[value] = false;
-    refresh();
+    // refresh();
   }
 
   updateFeatureData();
+}
+
+function makeSwitch(elt, value) {
+  let inputId = "flexSwitchCheckDefault";
+  if (value) {
+    inputId = "flexSwitchCheckChecked";
+  }
+  elt.children[0].id = inputId;
+  elt.children[0].checked = value;
+  elt.children[1].for = inputId;
 }
 
 function refresh() {

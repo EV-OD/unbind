@@ -41,7 +41,23 @@ function toogleSwitch(elt, value) {
     feature[value] = true;
   } else {
     feature[value] = false;
+    refresh();
   }
 
   updateFeatureData();
+}
+
+function refresh() {
+  chrome.tabs.query(
+    {
+      active: true,
+      currentWindow: true,
+    },
+    (tabs) => {
+      // ...and send a request for the DOM info...
+      chrome.tabs.sendMessage(tabs[0].id, {
+        action: `refresh`,
+      });
+    }
+  );
 }

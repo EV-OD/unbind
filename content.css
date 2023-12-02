@@ -2,9 +2,6 @@
     --background-color: #f4f4f4;
     --text-color: #333;
     --popup-background-color: #fff;
-    --success-color: #28a745;
-    --disabled-color: #868e96;
-    --primary-color: #007bff;
     --danger-color: #dc3545;
   }
   
@@ -12,10 +9,7 @@
     --background-color: #333;
     --text-color: #fff;
     --popup-background-color: #444;
-    --success-color: #4caf50;
-    --disabled-color: #555;
-    --primary-color: #2196f3;
-    --danger-color: #FF0000;
+    --danger-color: #DB4437;
   }
 
 body {

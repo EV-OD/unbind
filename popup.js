@@ -1,5 +1,6 @@
 let feature = {
   shorts: false,
+  subscription: false,
 };
 
 function updateFeatureData() {
@@ -21,9 +22,18 @@ function updateFeatureData() {
 
 // Attach an event listener to the button
 let shorts = document.querySelector("#shorts");
+
 shorts.addEventListener("click", () => {
   toogleSwitch(shorts, "shorts");
 });
+
+let subscription = document.querySelector("#subscription");
+
+shorts.addEventListener("click", () => {
+  toogleSwitch(subscription, "subscription");
+});
+
+
 
 function toogleSwitch(elt, value) {
   let checkbox = elt.children[0];

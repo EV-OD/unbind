@@ -22,14 +22,16 @@ function updateFeatureData() {
 // Attach an event listener to the button
 let shorts = document.querySelector("#shorts");
 shorts.addEventListener("click", () => {
-  feature.shorts = true;
-  let checkbox = shorts.children[0];
-  if (checkbox.checked) {
-    checkbox.checked = false;
-    feature.shorts = true;
-  } else {
-    checkbox.checked = true;
-    feature.shorts = false;
-  }
-  updateFeatureData();
+  toogleSwitch(shorts, "shorts");
 });
+
+function toogleSwitch(elt, value) {
+  let checkbox = elt.children[0];
+  if (checkbox.checked) {
+    feature[value] = true;
+  } else {
+    feature[value] = false;
+  }
+
+  updateFeatureData();
+}

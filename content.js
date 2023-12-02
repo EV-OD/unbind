@@ -17,11 +17,12 @@ let feature = {
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // Handle the message from the content script
   console.log("Message received in background:", request);
-  feature = request.data;
-  updateUnBind();
-
-  // You can send a response back if needed
-  sendResponse({ backgroundResponse: "Response from background" });
+  if (request.action == "updateFeatureData") {
+    feature = request.data;
+    updateUnBind();
+  } else if (request.action == "refresh") {
+    location.reload();
+  }
 });
 
 function updateUnBind() {

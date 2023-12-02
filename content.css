@@ -3,3 +3,34 @@ body{
     padding: 10px;
     
 }
+.lists{
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+}
+.folders{
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.fold{
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgb(215, 215, 215);
+    border-radius: 10px;
+
+}
+.fold .head{
+    display: flex;
+    justify-content: space-between;
+}
+.folders .content{
+    display:none;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+

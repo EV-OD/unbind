@@ -3,17 +3,29 @@
   "name": "unBind",
   "description": "This extension makes browsing more productive",
   "version": "1.0",
-  "permissions": ["activeTab", "webNavigation","storage", "tabs"],
+  "permissions": ["activeTab", "webNavigation","storage", "tabs", "history"],
   "background": {
     "service_worker": "background.js"
   },
+  
   "action": {
     "default_popup": "popup.html"
   },
+    "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/bookmark.png",
+        "assets/play.png",
+        "assets/delete.png",
+        "assets/save.png"
+      ],
+      "matches": ["https://*.youtube.com/*"]
+    }
+  ],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["store.js","content.js", "test.js"],
+      "js": ["contentScript.js","content.js", "test.js"],
       "css": ["content.css"]
     }
   ],

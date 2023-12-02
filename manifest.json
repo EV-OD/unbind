@@ -3,7 +3,7 @@
   "name": "unBind",
   "description": "This extension makes browsing more productive",
   "version": "1.0",
-  "permissions": ["activeTab", "webNavigation"],
+  "permissions": ["activeTab", "webNavigation", "storage"],
   "background": {
     "service_worker": "background.js"
   },

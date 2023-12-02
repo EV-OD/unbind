@@ -12,6 +12,7 @@ document.body.prepend(styleTag);
 
 let feature = {
   shorts: false,
+  subscription: false,
 };
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -27,6 +28,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 function updateUnBind() {
   removeUIElements();
 }
+
+
 
 function removeUIElements() {
   if (feature.shorts) {

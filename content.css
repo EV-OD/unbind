@@ -1,5 +1,112 @@
-body{
-    min-width:350px;
-    padding: 10px;
-    
-}
+:root {
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --popup-background-color: #fff;
+    --success-color: #28a745;
+    --disabled-color: #868e96;
+    --primary-color: #007bff;
+    --danger-color: #dc3545;
+  }
+  
+  body.dark-mode {
+    --background-color: #333;
+    --text-color: #fff;
+    --popup-background-color: #444;
+    --success-color: #4caf50;
+    --disabled-color: #555;
+    --primary-color: #2196f3;
+    --danger-color: #f44336;
+  }
+  
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    min-width: 300px;
+  }
+  
+  #popup {
+    max-width: 400px;
+    padding: 20px;
+    background-color: var(--popup-background-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+  }
+
+  .form-check-label{
+    color: var(--text-color);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 35px;
+    color: var(--text-color);
+
+  }
+  img{
+    height: 50px;
+    width: 50px;
+  }
+  
+  .logo img {
+    margin-right: 10px;
+  }
+  
+  h3 {
+    font-size: 18px;
+    color: var(--text-color);
+  }
+  
+  .dark img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .form-check {
+    margin-bottom: 15px;
+  }
+  
+  .form-check-input {
+    margin-right: 5px;
+  }
+  
+  .form-check-input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .form-switch {
+    display: flex;
+    align-items: center;
+  }
+  
+  #shortsSwitch:checked + .form-check-label {
+    color: var(--danger-color);
+  }
+  #subscriptionSwitch:checked + .form-check-label {
+    color: var(--danger-color);
+  }
+  #commentSwitch:checked + .form-check-label {
+    color: var(--danger-color);
+  }
+
+  #darkModeToggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  
+  #darkModeToggle img {
+    max-width: 30px;
+    height: auto;
+    margin-left: 10px; 
+  }
+  
+  

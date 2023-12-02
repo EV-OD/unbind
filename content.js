@@ -48,16 +48,23 @@ function redirectSubscription() {
   console.log(feature);
   if (feature.subscription) {
     var currentURL = window.location.href;
-
-    if (!/\/subscriptions$/.test(currentURL)) {
+    if (currentURL == "https://www.youtube.com/") {
       var subscriptionURL =
         window.location.protocol +
         "//" +
         window.location.host +
         "/feed/subscriptions";
-
       window.location.replace(subscriptionURL);
     }
+    //   if (!/\/subscriptions$/.test(currentURL)) {
+    //     var subscriptionURL =
+    //       window.location.protocol +
+    //       "//" +
+    //       window.location.host +
+    //       "/feed/subscriptions";
+
+    //     window.location.replace(subscriptionURL);
+    //   }
   }
 }
 

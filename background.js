@@ -1,21 +1,19 @@
-let feature = {
-  shorts: false,
-  subscription: false,
-};
+chrome.tabs.onUpdated.addListener((tabId, tab) => {
+  if (tab.url && tab.url.includes("youtube.com/watch")) {
+    const queryParameters = tab.url.split("?")[1];
+    const urlParameters = new URLSearchParams(queryParameters);
 
-chrome.webNavigation.onHistoryStateUpdated.addListener(
-  function (details) {
-    if (details.url && details.url.includes("/shorts/")) {
-      chrome.tabs.update(details.tabId, { url: "https://www.youtube.com/" });
-    }
-  },
-  { url: [{ urlMatches: "https://www.youtube.com/shorts/*" }] }
-);
+    chrome.tabs.sendMessage(tabId, {
+      type: "NEW",
+      videoId: urlParameters.get("v"),
+    });
+  }
+});
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  // Handle the message from the content script
-  console.log("Message received in background:", request);
-
-  // You can send a response back if needed
-  sendResponse({ backgroundResponse: "Response from background" });
+chrome.history.onVisited.addListener(() => {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {
+      type: "HISTORY",
+    });
+  });
 });

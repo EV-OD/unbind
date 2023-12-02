@@ -16,6 +16,13 @@ chrome.storage.sync.get("feature", (result) => {
   makeSwitch(subscription, result.feature.subscription);
 });
 
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.type == "BOOKMARKS") {
+    alert("hello");
+    sendResponse({ data: feature });
+  }
+});
+
 function updateFeatureData() {
   // Call the setFeatureDataAndNotify function
   chrome.tabs.query(

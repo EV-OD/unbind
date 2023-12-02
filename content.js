@@ -40,7 +40,7 @@ function redirectSubscription() {
         window.location.protocol +
         "//" +
         window.location.host +
-        "/subscriptions";
+        "/feed/subscriptions";
 
       window.location.replace(subscriptionURL);
     }

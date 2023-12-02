@@ -1,5 +1,6 @@
 let feature = {
   shorts: false,
+  subscription: false,
 };
 
 chrome.webNavigation.onHistoryStateUpdated.addListener(

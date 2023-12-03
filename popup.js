@@ -11,7 +11,7 @@ let feature = {
 //   }
 // });
 chrome.storage.sync.get("feature", (result) => {
-  if(result.feature){
+  if (result.feature) {
     feature = result.feature;
   }
   makeSwitch(shorts, result.feature.shorts);
@@ -19,8 +19,9 @@ chrome.storage.sync.get("feature", (result) => {
 });
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  console.log(request);
   if (request.type == "BOOKMARKS") {
-    alert("hello");
+    console.log(request);
     sendResponse({ data: feature });
   }
 });
@@ -90,4 +91,57 @@ function refresh() {
       });
     }
   );
+}
+
+window.onload = () => {
+  chrome.storage.sync.get("bookmarks", (result) => {
+    console.log(result);
+    if (result.bookmarks) {
+      addBookmark(result.bookmarks);
+    }
+  });
+};
+
+function addBookmark(folders) {
+  folders.forEach((folder) => {
+    addFolder(folder);
+  });
+}
+
+function addFolder(folder) {
+  let fold = "";
+  let bookmarkT = "";
+  folder.bookmarks.forEach((bom) => {
+    bookmarkT += `
+      <a href='${bom}'>${"BookMark"}</a>
+      `;
+  });
+  let code = `
+            <div class="f1 fold">
+            <div class="head">
+              <h3>${folder.folderName}</h3>
+              <button class="expand-btn">⌄</button>
+            </div>
+            <div class="content hidden">
+                  ${bookmarkT}
+            </div>
+          </div>
+  `;
+  let f = document.querySelector(".folders");
+  f.innerHTML += code;
+  let btns = document.querySelectorAll(".expand-btn");
+  btns.forEach((btn) => {
+    console.log(btn);
+    if (!btn.onclick) {
+      btn.onclick = (e) => {
+        console.log(btn.parentElement);
+        let content = btn.parentElement.parentElement.querySelector(".content");
+        if (content.classList.contains("hidden")) {
+          content.classList.remove("hidden");
+        } else {
+          content.classList.add("hidden");
+        }
+      };
+    }
+  });
 }

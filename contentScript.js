@@ -33,14 +33,16 @@ let loader = () => {
 };
 
 let bookmarks = [
-  {
-    folderName: "f1",
-    bookmarks: ["lol", "lol2"],
-  },
-  {
-    folderName: "f2",
-    bookmarks: ["lol3", "lol4"],
-  },
+  // {
+  //   id: 1,
+  //   folderName: "f1",
+  //   bookmarks: ["lol", "lol2"],
+  // },
+  // {
+  //   id: 2,
+  //   folderName: "f2",
+  //   bookmarks: ["lol3", "lol4"],
+  // },
 ];
 
 function saveBookMarksToStorage() {
@@ -120,10 +122,18 @@ function showModal() {
     document.querySelector(".save__btn").addEventListener("click", () => {
       let bookmarkName = document.querySelector(".bookmark__input").value;
       let folderName = document.querySelector(".folder__select").value;
-      bookmarks.push({
-        folderName: bookmarkName ? bookmarkName : folderName,
-        bookmarks: ["sexy", "sexy2"],
-      });
+      let count = bookmarks.length + 1;
+      console.log(bookmarkName);
+      if (bookmarkName == "") {
+        bookmarks
+          .filter((b) => b.folderName == folderName)
+          .bookmarks.push(location.href);
+      } else {
+        bookmarks.push({
+          folderName: bookmarkName,
+          bookmarks: [location.href],
+        });
+      }
       saveBookMarksToStorage();
       closeModal();
     });

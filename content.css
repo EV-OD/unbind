@@ -107,3 +107,38 @@ body {
     margin-left: 10px; /* Adjust margin for spacing */
   }
   
+.fold{
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    padding: 10px;
+    color: white;
+  
+}
+.expand-btn:hover{
+    background: #b3b3b354;
+}
+
+.expand-btn{
+      background: none;
+
+    border: none;
+    border-radius: 100px;
+    color: white;
+    width: 30px;
+    height: 30px;
+}
+
+.head{
+  display: flex;
+  justify-content: space-between;
+}
+.content.hidden{
+  display: none;
+}
+.content a{
+    width: 100%;
+    padding: 10px;
+    background-color: #212121;
+    
+}

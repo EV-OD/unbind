@@ -18,7 +18,6 @@ chrome.storage.sync.get("feature", (result) => {
   makeSwitch(shorts, result.feature.shorts);
   makeSwitch(subscription, result.feature.subscription);
   makeSwitch(hideComment, result.feature.hideComment);
-
 });
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -128,7 +127,7 @@ function addFolder(folder) {
   let code = `
             <div class="f1 fold">
             <div class="head">
-              <h3>${folder.folderName}</h3>
+              <h6>${folder.folderName}</h6>
               <button class="expand-btn">⌄</button>
             </div>
             <div class="content hidden">

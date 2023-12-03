@@ -83,8 +83,9 @@ function showModal() {
     let code = `
       <div class="modal">
       <div class="content">
+      <h1>Add new bookmark</h1>
       <input class="bookmark__input" type="text" placeholder="Create new bookmark" />
-      <span>OR</span>
+      <span>OR Add to existing folder</span>
       <select class="folder__select" name="folders" id="folders">
       ${options}
       </select>
@@ -107,15 +108,44 @@ function showModal() {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        border-radius: 10px;
+        padding:5px;
       }
       .content {
         display: flex;
-        background-color: white;
-        flex-direction: column;
-        padding:10px;
+    background-color: white;
+    flex-direction: column;
+    padding: 10px;
+    width: 350px;
+    gap:10px;
       }
-      .content *{
-        padding:5px;
+      .bookmark__input {
+        border: 1px solid #a4a4a4;
+    border-radius: 5px;
+    padding-block: 10px;
+      }
+      .folder__select {
+            border: 1px solid #a4a4a4;
+    border-radius: 5px;
+    padding-block: 10px;
+      }
+      .save__btn{
+            padding: 10px;
+    border-radius: 10px;
+    border: none;
+    padding-inline: 20px;
+    background: #d8d8d8;
+    cursor:pointer;
+      }
+      .cancel{
+        padding: 10px;
+    border-radius: 10px;
+    border: none;
+    padding-inline: 20px;
+    color: white;
+    background: #cb3a3a;
+    cursor:pointer;
+    margin-left:auto;
       }
       </style>
     `;
@@ -130,7 +160,7 @@ function showModal() {
       let folderName = document.querySelector(".folder__select").value;
       let count = bookmarks.length + 1;
       if (bookmarkName == "") {
-        let f = bookmarks.filter((b) => b.folderName == folderName);
+        let f = bookmarks.filter((b) => b.folderName == folderName)[0];
         f.bookmarks.push({
           url: convertToShortUrl(location.href),
           title: getTitle(),

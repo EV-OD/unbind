@@ -108,15 +108,18 @@ body {
   }
   
 .fold{
-    display: flex;
+display: flex;
     flex-direction: column;
-    background-color: #333;
+    background-color: #dbdbdb;
     padding: 10px;
-    color: white;
+    color: #616161;
   
 }
 .expand-btn:hover{
     background: #b3b3b354;
+}
+.lists{
+  margin-top: 30px;
 }
 
 .expand-btn{
@@ -124,7 +127,7 @@ body {
 
     border: none;
     border-radius: 100px;
-    color: white;
+    color: black;
     width: 30px;
     height: 30px;
 }
@@ -136,11 +139,16 @@ body {
 .content.hidden{
   display: none;
 }
+.content{
+      display: flex;
+    flex-direction: column;
+}
 .content a{
-    width: 100%;
-    padding: 10px;
-    background-color: #212121;
-    font-size: 0.8em;
-    color: white;
-    overflow-x: auto;
+  width: 100%;
+  padding: 10px;
+  background-color: #b6b6b6;
+  font-size: 0.8em;
+  color: #126f9c;
+  overflow-x: auto;
+  margin-bottom: 5px;
 }

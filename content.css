@@ -140,5 +140,7 @@ body {
     width: 100%;
     padding: 10px;
     background-color: #212121;
-    
+    font-size: 0.8em;
+    color: white;
+    overflow-x: auto;
 }

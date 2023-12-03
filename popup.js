@@ -113,7 +113,7 @@ function addFolder(folder) {
   let bookmarkT = "";
   folder.bookmarks.forEach((bom) => {
     bookmarkT += `
-      <a href='${bom}'>${"BookMark"}</a>
+      <a href='${bom.url}'>${bom.title}</a>
       `;
   });
   let code = `
@@ -127,9 +127,23 @@ function addFolder(folder) {
             </div>
           </div>
   `;
+  console.log(code);
   let f = document.querySelector(".folders");
   f.innerHTML += code;
   let btns = document.querySelectorAll(".expand-btn");
+  let anchorTag = document.querySelectorAll(".content a");
+  anchorTag.forEach((a) => {
+    if (!a.onclick) {
+      a.onclick = (e) => {
+        chrome.tabs.query(
+          { active: true, currentWindow: true },
+          function (tabs) {
+            chrome.tabs.update(tabs[0].id, { url: a.href });
+          }
+        );
+      };
+    }
+  });
   btns.forEach((btn) => {
     console.log(btn);
     if (!btn.onclick) {

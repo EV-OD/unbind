@@ -36,7 +36,7 @@ let bookmarks = [
   // {
   //   id: 1,
   //   folderName: "f1",
-  //   bookmarks: ["lol", "lol2"],
+  //   bookmarks: [{ url: "lol", title: "test" }],
   // },
   // {
   //   id: 2,
@@ -46,9 +46,15 @@ let bookmarks = [
 ];
 
 function saveBookMarksToStorage() {
-  chrome.storage.sync.set({
-    bookmarks: bookmarks,
-  });
+  console.log(1);
+  chrome.storage.sync.set(
+    {
+      bookmarks: bookmarks,
+    },
+    () => {
+      console.log("byw");
+    }
+  );
 }
 
 function getBookmarksFromStorage(func) {
@@ -123,21 +129,32 @@ function showModal() {
       let bookmarkName = document.querySelector(".bookmark__input").value;
       let folderName = document.querySelector(".folder__select").value;
       let count = bookmarks.length + 1;
-      console.log(bookmarkName);
       if (bookmarkName == "") {
         bookmarks
           .filter((b) => b.folderName == folderName)
-          .bookmarks.push(location.href);
+          .bookmarks.push({
+            url: convertToShortUrl(location.href),
+            title: getTitle(),
+          });
       } else {
         bookmarks.push({
           folderName: bookmarkName,
-          bookmarks: [location.href],
+          bookmarks: [
+            { url: convertToShortUrl(location.href), title: getTitle() },
+          ],
+          id: count,
         });
       }
       saveBookMarksToStorage();
       closeModal();
+      console.log(bookmarks);
     });
   });
+}
+
+function getTitle() {
+  return document.querySelector("h1.style-scope.ytd-watch-metadata").children[0]
+    .innerText;
 }
 
 function closeModal() {
@@ -150,3 +167,10 @@ const addNewBookmarkEventHandler = () => {
 };
 
 loader();
+
+function convertToShortUrl(longUrl) {
+  const urlParams = new URLSearchParams(longUrl);
+  const videoId = urlParams.get("v");
+  console.log(urlParams);
+  return `https://youtu.be/${videoId}`;
+}

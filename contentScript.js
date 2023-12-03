@@ -130,17 +130,21 @@ function showModal() {
       let folderName = document.querySelector(".folder__select").value;
       let count = bookmarks.length + 1;
       if (bookmarkName == "") {
-        bookmarks
-          .filter((b) => b.folderName == folderName)
-          .bookmarks.push({
-            url: convertToShortUrl(location.href),
-            title: getTitle(),
-          });
+        let f = bookmarks.filter((b) => b.folderName == folderName);
+        f.bookmarks.push({
+          url: convertToShortUrl(location.href),
+          title: getTitle(),
+          id: f.bookmarks.length + 1,
+        });
       } else {
         bookmarks.push({
           folderName: bookmarkName,
           bookmarks: [
-            { url: convertToShortUrl(location.href), title: getTitle() },
+            {
+              url: convertToShortUrl(location.href),
+              title: getTitle(),
+              id: 1,
+            },
           ],
           id: count,
         });
@@ -169,8 +173,16 @@ const addNewBookmarkEventHandler = () => {
 loader();
 
 function convertToShortUrl(longUrl) {
-  const urlParams = new URLSearchParams(longUrl);
+  let url = longUrl.substring(29, longUrl.length);
+  const urlParams = new URLSearchParams(url);
   const videoId = urlParams.get("v");
   console.log(urlParams);
-  return `https://youtu.be/${videoId}`;
+
+  return `https://youtu.be/${videoId}?t=${getCurrentTime()}`;
+  //https://youtu.be/ZJI5NXlVhrU?t=5
+}
+
+function getCurrentTime() {
+  let d = document.querySelector(".video-stream.html5-main-video");
+  return parseInt(d.currentTime);
 }

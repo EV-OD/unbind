@@ -99,7 +99,6 @@ function removeUIElements() {
 }
 
 function hideComments() {
-  console.log("lol")
   if (feature.hideComment) {
     // Select the target node
     document.body.appendChild(document.createElement('style')).textContent = '.ytd-comments { display: none !important; }';

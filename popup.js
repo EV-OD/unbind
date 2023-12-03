@@ -1,6 +1,7 @@
 let feature = {
   shorts: false,
   subscription: false,
+  hideComment: false,
 };
 
 // chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -16,6 +17,8 @@ chrome.storage.sync.get("feature", (result) => {
   }
   makeSwitch(shorts, result.feature.shorts);
   makeSwitch(subscription, result.feature.subscription);
+  makeSwitch(hideComment, result.feature.hideComment);
+
 });
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -54,6 +57,12 @@ let subscription = document.querySelector("#subscription");
 
 subscription.addEventListener("click", () => {
   toogleSwitch(subscription, "subscription");
+});
+
+let hideComment = document.querySelector("#comment");
+
+hideComment.addEventListener("click", () => {
+  toogleSwitch(hideComment, "hideComment");
 });
 
 function toogleSwitch(elt, value) {

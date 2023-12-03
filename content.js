@@ -13,6 +13,7 @@ document.body.prepend(styleTag);
 let feature = {
   shorts: false,
   subscription: false,
+  hideComment: false,
 };
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -41,6 +42,7 @@ window.onload = function () {
 function updateUnBind() {
   removeUIElements();
   redirectSubscription();
+  hideComments();
 }
 
 function redirectSubscription() {
@@ -94,6 +96,14 @@ function removeUIElements() {
       elt.parentElement.parentElement.parentElement.remove();
     });
   }
+}
+
+function hideComments() {
+  console.log("lol")
+  if (feature.hideComment) {
+    // Select the target node
+    document.body.appendChild(document.createElement('style')).textContent = '.ytd-comments { display: none !important; }';
+    };
 }
 
 // Remove the UI elements on initial page load
